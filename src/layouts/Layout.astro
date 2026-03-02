@@ -1,17 +1,21 @@
 ---
 import "../styles/global.css";
 import { siteConfig } from "../config/site";
+import { t } from "../i18n";
+import type { Locale } from "../i18n";
 
 interface Props {
+  locale: Locale;
   title?: string;
   description?: string;
 }
 
-const {
-  title = siteConfig.seo.title,
-  description = siteConfig.seo.description,
-} = Astro.props;
+const { locale, title, description } = Astro.props;
 
+const resolvedTitle = title ?? t(locale, "seoTitle");
+const resolvedDescription = description ?? t(locale, "seoDescription");
+const ogLocale = t(locale, "ogLocale");
+const htmlLang = locale === "es-AR" ? "es-AR" : "en";
 const canonicalURL = new URL(Astro.url.pathname, siteConfig.url);
 
 const jsonLd = {
@@ -33,15 +37,15 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang={htmlLang} class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
     <!-- SEO -->
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{resolvedTitle}</title>
+    <meta name="description" content={resolvedDescription} />
     <meta name="keywords" content={siteConfig.seo.keywords.join(", ")} />
     <meta name="author" content={siteConfig.name} />
     <link rel="canonical" href={canonicalURL.href} />
@@ -49,15 +53,15 @@ const jsonLd = {
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL.href} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={resolvedTitle} />
+    <meta property="og:description" content={resolvedDescription} />
     <meta property="og:site_name" content={siteConfig.name} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={ogLocale} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={resolvedTitle} />
+    <meta name="twitter:description" content={resolvedDescription} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

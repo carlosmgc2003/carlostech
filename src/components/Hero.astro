@@ -1,5 +1,13 @@
 ---
 import { siteConfig } from "../config/site";
+import { t } from "../i18n";
+import type { Locale } from "../i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
 ---
 
 <section id="hero" class="relative min-h-screen flex items-center overflow-hidden">
@@ -30,7 +38,7 @@ import { siteConfig } from "../config/site";
         >
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
           ></span>
-          Available for opportunities
+          {t(locale, "heroStatus")}
         </span>
       </div>
 
@@ -44,14 +52,14 @@ import { siteConfig } from "../config/site";
       <p
         class="fade-in mt-4 text-xl sm:text-2xl font-medium text-navy-300 tracking-tight"
       >
-        {siteConfig.title}
+        {t(locale, "heroTitle")}
         <span class="text-navy-500 mx-2">|</span>
-        {siteConfig.subtitle}
+        {t(locale, "heroSubtitle")}
       </p>
 
       <!-- Tagline -->
       <p class="fade-in mt-6 text-base sm:text-lg text-navy-400 max-w-2xl leading-relaxed">
-        {siteConfig.tagline}
+        {t(locale, "heroTagline")}
       </p>
 
       <!-- CTAs -->
@@ -60,7 +68,7 @@ import { siteConfig } from "../config/site";
           href="#projects"
           class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-linear-to-r from-accent-blue to-accent-purple text-white font-medium text-sm hover:opacity-90 transition-opacity"
         >
-          View Projects
+          {t(locale, "heroViewProjects")}
           <svg
             class="w-4 h-4"
             fill="none"
@@ -78,7 +86,7 @@ import { siteConfig } from "../config/site";
           href="#contact"
           class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-navy-600 text-navy-200 font-medium text-sm hover:border-navy-500 hover:text-white transition-all"
         >
-          Contact
+          {t(locale, "heroContact")}
         </a>
       </div>
 
@@ -88,19 +96,19 @@ import { siteConfig } from "../config/site";
       >
         <div>
           <p class="text-2xl font-bold text-white">3+</p>
-          <p class="text-sm text-navy-400 mt-1">Years Fintech</p>
+          <p class="text-sm text-navy-400 mt-1">{t(locale, "heroStatYears")}</p>
         </div>
         <div>
           <p class="text-2xl font-bold text-white">PCI-DSS</p>
-          <p class="text-sm text-navy-400 mt-1">Compliant Systems</p>
+          <p class="text-sm text-navy-400 mt-1">{t(locale, "heroStatCompliance")}</p>
         </div>
         <div>
           <p class="text-2xl font-bold text-white">ISO 8583</p>
-          <p class="text-sm text-navy-400 mt-1">Payment Protocol</p>
+          <p class="text-sm text-navy-400 mt-1">{t(locale, "heroStatProtocol")}</p>
         </div>
         <div>
           <p class="text-2xl font-bold text-white">ITBA</p>
-          <p class="text-sm text-navy-400 mt-1">Teaching Assistant</p>
+          <p class="text-sm text-navy-400 mt-1">{t(locale, "heroStatTeaching")}</p>
         </div>
       </div>
     </div>

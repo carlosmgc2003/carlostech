@@ -1,5 +1,14 @@
 ---
-import { siteConfig } from "../config/site";
+import { t, getExpertise, getExperience } from "../i18n";
+import type { Locale } from "../i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const expertise = getExpertise(locale);
+const experience = getExperience(locale);
 
 const iconPaths: Record<string, string> = {
   server:
@@ -19,16 +28,16 @@ const iconPaths: Record<string, string> = {
   <div class="section-container">
     <div class="fade-in mb-12">
       <p class="text-sm font-medium text-accent-blue uppercase tracking-widest mb-3">
-        Expertise
+        {t(locale, "expertiseLabel")}
       </p>
       <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-        What I Do
+        {t(locale, "expertiseHeading")}
       </h2>
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
       {
-        siteConfig.expertise.map((item) => (
+        expertise.map((item) => (
           <div class="fade-in card group">
             <div class="w-10 h-10 rounded-lg bg-navy-800 border border-navy-700/50 flex items-center justify-center mb-4 group-hover:border-accent-blue/30 transition-colors">
               <svg
@@ -59,11 +68,11 @@ const iconPaths: Record<string, string> = {
       <h3
         class="text-sm font-medium text-navy-500 uppercase tracking-widest mb-8"
       >
-        Experience
+        {t(locale, "experienceLabel")}
       </h3>
       <div class="space-y-0">
         {
-          siteConfig.experience.map((exp, i) => (
+          experience.map((exp) => (
             <div class="fade-in relative pl-8 pb-8 border-l border-navy-700/50 last:pb-0">
               <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-navy-700 border-2 border-navy-950" />
               <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-4">

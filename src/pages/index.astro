@@ -8,17 +8,20 @@ import Experience from "../components/Experience.astro";
 import Projects from "../components/Projects.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+import { getLocale } from "../i18n";
+
+const locale = getLocale(Astro.request);
 ---
 
-<Layout>
-  <Nav />
+<Layout locale={locale}>
+  <Nav locale={locale} />
   <main>
-    <Hero />
-    <About />
-    <TechStack />
-    <Experience />
-    <Projects />
-    <Contact />
+    <Hero locale={locale} />
+    <About locale={locale} />
+    <TechStack locale={locale} />
+    <Experience locale={locale} />
+    <Projects locale={locale} />
+    <Contact locale={locale} />
   </main>
-  <Footer />
+  <Footer locale={locale} />
 </Layout>

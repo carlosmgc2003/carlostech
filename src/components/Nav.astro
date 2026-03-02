@@ -1,13 +1,24 @@
 ---
 import { siteConfig } from "../config/site";
+import { t } from "../i18n";
+import type { Locale } from "../i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Stack", href: "#stack" },
-  { label: "Expertise", href: "#expertise" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: t(locale, "navAbout"), href: "#about" },
+  { label: t(locale, "navStack"), href: "#stack" },
+  { label: t(locale, "navExpertise"), href: "#expertise" },
+  { label: t(locale, "navProjects"), href: "#projects" },
+  { label: t(locale, "navContact"), href: "#contact" },
 ];
+
+const otherLocale = locale === "es-AR" ? "en" : "es-AR";
+const toggleLabel = locale === "es-AR" ? "EN" : "ES";
 ---
 
 <header
@@ -25,42 +36,72 @@ const navLinks = [
     </a>
 
     <!-- Desktop Nav -->
-    <ul class="hidden md:flex items-center gap-8">
-      {
-        navLinks.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class="text-sm text-navy-300 hover:text-white transition-colors duration-200"
-            >
-              {link.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <div class="hidden md:flex items-center gap-8">
+      <ul class="flex items-center gap-8">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm text-navy-300 hover:text-white transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Language Toggle -->
+      <button
+        id="lang-toggle-desktop"
+        data-locale={otherLocale}
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-navy-700/50 bg-navy-800/50 text-xs font-medium text-navy-300 hover:border-accent-blue/40 hover:text-white transition-all duration-200 cursor-pointer"
+        aria-label={`Switch to ${otherLocale === "es-AR" ? "Spanish" : "English"}`}
+      >
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+        </svg>
+        {toggleLabel}
+      </button>
+    </div>
 
     <!-- Mobile Menu Button -->
-    <button
-      id="mobile-menu-btn"
-      class="md:hidden text-navy-300 hover:text-white transition-colors"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-    >
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
+    <div class="flex md:hidden items-center gap-3">
+      <!-- Mobile Language Toggle -->
+      <button
+        id="lang-toggle-mobile"
+        data-locale={otherLocale}
+        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-navy-700/50 bg-navy-800/50 text-xs font-medium text-navy-300 hover:border-accent-blue/40 hover:text-white transition-all duration-200 cursor-pointer"
+        aria-label={`Switch to ${otherLocale === "es-AR" ? "Spanish" : "English"}`}
       >
-        <path
-          id="menu-icon"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+        </svg>
+        {toggleLabel}
+      </button>
+
+      <button
+        id="mobile-menu-btn"
+        class="text-navy-300 hover:text-white transition-colors"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            id="menu-icon"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
   </nav>
 
   <!-- Mobile Menu -->
@@ -112,5 +153,14 @@ const navLinks = [
     } else {
       nav?.classList.remove("bg-navy-950/90", "backdrop-blur-lg", "border-b", "border-navy-800/50");
     }
+  });
+
+  // Language toggle (both desktop and mobile buttons)
+  document.querySelectorAll("#lang-toggle-desktop, #lang-toggle-mobile").forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const target = (toggle as HTMLElement).dataset.locale;
+      document.cookie = `lang=${target}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax`;
+      window.location.reload();
+    });
   });
 </script>

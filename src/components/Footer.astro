@@ -1,5 +1,13 @@
 ---
 import { siteConfig } from "../config/site";
+import { t } from "../i18n";
+import type { Locale } from "../i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -7,7 +15,7 @@ const year = new Date().getFullYear();
   <div class="section-container">
     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
       <p class="text-sm text-navy-500">
-        © {year} {siteConfig.shortName}. All rights reserved.
+        © {year} {siteConfig.shortName}. {t(locale, "footerRights")}
       </p>
       <div class="flex items-center gap-5">
         <a
