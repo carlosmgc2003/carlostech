@@ -4,7 +4,7 @@ import type { TranslationKeys } from "./en";
 
 export type Locale = "en" | "es-AR";
 
-const translations: Record<Locale, Record<TranslationKeys, string | string[]>> = {
+const translations: Record<Locale, Record<TranslationKeys, string | readonly string[]>> = {
     en,
     "es-AR": esAR,
 };
@@ -41,14 +41,14 @@ export function getLocale(request: Request): Locale {
 export function t(locale: Locale, key: TranslationKeys): string {
     const value = translations[locale]?.[key] ?? translations.en[key];
     if (Array.isArray(value)) return value[0];
-    return value;
+    return value as string;
 }
 
 /** Get a translated string array (e.g. paragraphs). */
-export function tArray(locale: Locale, key: TranslationKeys): string[] {
+export function tArray(locale: Locale, key: TranslationKeys): readonly string[] {
     const value = translations[locale]?.[key] ?? translations.en[key];
     if (Array.isArray(value)) return value;
-    return [value];
+    return [value as string];
 }
 
 /** Get the category name translation. */
