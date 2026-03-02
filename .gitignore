@@ -23,3 +23,6 @@ Thumbs.db
 
 # Profile
 Profile.pdf
+
+# Vercel
+.vercel/
