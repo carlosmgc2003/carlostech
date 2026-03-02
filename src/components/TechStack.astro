@@ -1,0 +1,43 @@
+---
+import { siteConfig } from "../config/site";
+
+const categories = [...new Set(siteConfig.techStack.map((t) => t.category))];
+---
+
+<section id="stack" class="section-padding border-t border-navy-800/30">
+  <div class="section-container">
+    <div class="fade-in mb-12">
+      <p class="text-sm font-medium text-accent-blue uppercase tracking-widest mb-3">
+        Technology
+      </p>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        Tech Stack
+      </h2>
+      <p class="mt-3 text-navy-400 max-w-xl">
+        Tools and technologies I work with daily to build robust financial
+        systems.
+      </p>
+    </div>
+
+    <div class="space-y-10">
+      {
+        categories.map((category) => (
+          <div class="fade-in">
+            <h3 class="text-xs font-medium text-navy-500 uppercase tracking-widest mb-4">
+              {category}
+            </h3>
+            <div class="flex flex-wrap gap-3">
+              {siteConfig.techStack
+                .filter((t) => t.category === category)
+                .map((tech) => (
+                  <span class="inline-flex items-center px-4 py-2 rounded-lg border border-navy-700/50 bg-navy-800/30 text-sm text-navy-200 hover:border-navy-600 hover:text-white transition-all duration-200 cursor-default">
+                    {tech.name}
+                  </span>
+                ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

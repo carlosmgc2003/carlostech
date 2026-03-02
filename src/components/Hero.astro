@@ -1,0 +1,126 @@
+---
+import { siteConfig } from "../config/site";
+---
+
+<section id="hero" class="relative min-h-screen flex items-center overflow-hidden">
+  <!-- Gradient background effects -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div
+      class="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-accent-blue/5 rounded-full blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-accent-purple/5 rounded-full blur-3xl"
+    >
+    </div>
+    <!-- Grid pattern -->
+    <div
+      class="absolute inset-0 opacity-[0.02]"
+      style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 60px 60px;"
+    >
+    </div>
+  </div>
+
+  <div class="section-container relative z-10 pt-24 pb-16">
+    <div class="max-w-3xl">
+      <!-- Status badge -->
+      <div class="fade-in mb-8">
+        <span
+          class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-navy-700/50 bg-navy-800/50 text-sm text-navy-300"
+        >
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+          ></span>
+          Available for opportunities
+        </span>
+      </div>
+
+      <!-- Name -->
+      <h1 class="fade-in text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+        {siteConfig.shortName}
+        <span class="gradient-text">{" "}{siteConfig.name.split(" ").slice(1).join(" ")}</span>
+      </h1>
+
+      <!-- Title -->
+      <p
+        class="fade-in mt-4 text-xl sm:text-2xl font-medium text-navy-300 tracking-tight"
+      >
+        {siteConfig.title}
+        <span class="text-navy-500 mx-2">|</span>
+        {siteConfig.subtitle}
+      </p>
+
+      <!-- Tagline -->
+      <p class="fade-in mt-6 text-base sm:text-lg text-navy-400 max-w-2xl leading-relaxed">
+        {siteConfig.tagline}
+      </p>
+
+      <!-- CTAs -->
+      <div class="fade-in mt-10 flex flex-wrap gap-4">
+        <a
+          href="#projects"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-linear-to-r from-accent-blue to-accent-purple text-white font-medium text-sm hover:opacity-90 transition-opacity"
+        >
+          View Projects
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </a>
+        <a
+          href="#contact"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-navy-600 text-navy-200 font-medium text-sm hover:border-navy-500 hover:text-white transition-all"
+        >
+          Contact
+        </a>
+      </div>
+
+      <!-- Quick stats -->
+      <div
+        class="fade-in mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 pt-8 border-t border-navy-800/50"
+      >
+        <div>
+          <p class="text-2xl font-bold text-white">3+</p>
+          <p class="text-sm text-navy-400 mt-1">Years Fintech</p>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-white">PCI-DSS</p>
+          <p class="text-sm text-navy-400 mt-1">Compliant Systems</p>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-white">ISO 8583</p>
+          <p class="text-sm text-navy-400 mt-1">Payment Protocol</p>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-white">ITBA</p>
+          <p class="text-sm text-navy-400 mt-1">Teaching Assistant</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div
+    class="absolute bottom-8 left-1/2 -translate-x-1/2 text-navy-500 animate-bounce"
+  >
+    <svg
+      class="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>
