@@ -3,7 +3,7 @@ import type { TranslationKeys } from "./en";
 export const esAR: Record<TranslationKeys, string | string[]> = {
     // Layout / SEO
     seoTitle:
-        "Carlos Maceira Garcia Coni — Arquitecto Backend | Fintech y Pagos",
+        "Carlos Maceira García Coni — Arquitecto Backend | Fintech y Pagos",
     seoDescription:
         "Arquitecto Backend especializado en Fintech, Sistemas de Pagos, ISO 8583, Go, NestJS y DevOps. Construyendo microservicios escalables y seguros para la industria financiera.",
     ogLocale: "es_AR",
