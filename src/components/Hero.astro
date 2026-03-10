@@ -11,104 +11,105 @@ const { locale } = Astro.props;
 ---
 
 <section id="hero" class="relative min-h-screen flex items-center overflow-hidden">
-  <!-- Gradient background effects -->
+  <!-- Background effects -->
   <div class="absolute inset-0 pointer-events-none">
+    <!-- Signal blue glow — top left -->
     <div
-      class="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-accent-blue/5 rounded-full blur-3xl"
-    >
-    </div>
+      class="absolute top-1/4 -left-1/4 w-[600px] h-[600px] rounded-full blur-3xl"
+      style="background: var(--accent-glow); opacity: 0.6;"
+    ></div>
+    <!-- Gold glow — bottom right -->
     <div
-      class="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-accent-purple/5 rounded-full blur-3xl"
-    >
-    </div>
-    <!-- Grid pattern -->
+      class="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] rounded-full blur-3xl"
+      style="background: var(--accent-gold-glow); opacity: 0.5;"
+    ></div>
+    <!-- Subtle grid -->
     <div
-      class="absolute inset-0 opacity-[0.02]"
-      style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 60px 60px;"
-    >
-    </div>
+      class="absolute inset-0"
+      style="
+        background-image:
+          linear-gradient(var(--border) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border) 1px, transparent 1px);
+        background-size: 60px 60px;
+        opacity: 0.35;
+      "
+    ></div>
   </div>
 
   <div class="section-container relative z-10 pt-24 pb-16">
     <div class="max-w-3xl">
+
       <!-- Status badge -->
       <div class="fade-in mb-8">
-        <span
-          class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-navy-700/50 bg-navy-800/50 text-sm text-navy-300"
-        >
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+        <span class="badge">
+          <span
+            class="w-2 h-2 rounded-full animate-pulse"
+            style="background-color: #34d399;"
           ></span>
           {t(locale, "heroStatus")}
         </span>
       </div>
 
       <!-- Name -->
-      <h1 class="fade-in text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+      <h1
+        class="fade-in text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight"
+        style="color: var(--text-heading);"
+      >
         {siteConfig.shortName}
         <span class="gradient-text">{" "}{siteConfig.name.split(" ").slice(1).join(" ")}</span>
       </h1>
 
       <!-- Title -->
       <p
-        class="fade-in mt-4 text-xl sm:text-2xl font-medium text-navy-300 tracking-tight"
+        class="fade-in mt-4 text-xl sm:text-2xl font-medium tracking-tight"
+        style="color: var(--text-secondary);"
       >
         {t(locale, "heroTitle")}
-        <span class="text-navy-500 mx-2">|</span>
+        <span class="mx-2" style="color: var(--border-hover);">|</span>
         {t(locale, "heroSubtitle")}
       </p>
 
       <!-- Tagline -->
-      <p class="fade-in mt-6 text-base sm:text-lg text-navy-400 max-w-2xl leading-relaxed">
+      <p
+        class="fade-in mt-6 text-base sm:text-lg max-w-2xl leading-relaxed"
+        style="color: var(--text-muted);"
+      >
         {t(locale, "heroTagline")}
       </p>
 
       <!-- CTAs -->
       <div class="fade-in mt-10 flex flex-wrap gap-4">
-        <a
-          href="#projects"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-linear-to-r from-accent-blue to-accent-purple text-white font-medium text-sm hover:opacity-90 transition-opacity"
-        >
+        <a href="#projects" class="btn-primary">
           {t(locale, "heroViewProjects")}
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"></path>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </a>
-        <a
-          href="#contact"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-navy-600 text-navy-200 font-medium text-sm hover:border-navy-500 hover:text-white transition-all"
-        >
+        <a href="#contact" class="btn-secondary">
           {t(locale, "heroContact")}
         </a>
       </div>
 
       <!-- Quick stats -->
       <div
-        class="fade-in mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 pt-8 border-t border-navy-800/50"
+        class="fade-in mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 pt-8 border-t"
+        style="border-color: var(--border);"
       >
         <div>
-          <p class="text-2xl font-bold text-white">3+</p>
-          <p class="text-sm text-navy-400 mt-1">{t(locale, "heroStatYears")}</p>
+          <p class="text-2xl font-bold" style="color: var(--text-heading);">3+</p>
+          <p class="text-sm mt-1" style="color: var(--text-muted);">{t(locale, "heroStatYears")}</p>
         </div>
         <div>
-          <p class="text-2xl font-bold text-white">PCI-DSS</p>
-          <p class="text-sm text-navy-400 mt-1">{t(locale, "heroStatCompliance")}</p>
+          <p class="text-2xl font-bold" style="color: var(--accent-gold);">PCI-DSS</p>
+          <p class="text-sm mt-1" style="color: var(--text-muted);">{t(locale, "heroStatCompliance")}</p>
         </div>
         <div>
-          <p class="text-2xl font-bold text-white">ISO 8583</p>
-          <p class="text-sm text-navy-400 mt-1">{t(locale, "heroStatProtocol")}</p>
+          <p class="text-2xl font-bold" style="color: var(--text-heading);">ISO 8583</p>
+          <p class="text-sm mt-1" style="color: var(--text-muted);">{t(locale, "heroStatProtocol")}</p>
         </div>
         <div>
-          <p class="text-2xl font-bold text-white">ITBA</p>
-          <p class="text-sm text-navy-400 mt-1">{t(locale, "heroStatTeaching")}</p>
+          <p class="text-2xl font-bold" style="color: var(--text-heading);">ITBA</p>
+          <p class="text-sm mt-1" style="color: var(--text-muted);">{t(locale, "heroStatTeaching")}</p>
         </div>
       </div>
     </div>
@@ -116,19 +117,11 @@ const { locale } = Astro.props;
 
   <!-- Scroll indicator -->
   <div
-    class="absolute bottom-8 left-1/2 -translate-x-1/2 text-navy-500 animate-bounce"
+    class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+    style="color: var(--text-muted);"
   >
-    <svg
-      class="w-5 h-5"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="1.5"
-        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
     </svg>
   </div>
 </section>

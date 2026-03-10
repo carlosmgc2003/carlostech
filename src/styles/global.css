@@ -1,25 +1,70 @@
 @import "tailwindcss";
 
+/* ============================================================
+   ARMY SIGNAL CORPS THEME
+   Argentine Army Signal Corps — Azul Eléctrico + MULTICAM Earth
+   Dark / Light mode via .dark / .light class on <html>
+   ============================================================ */
+
 @theme {
-    --color-navy-950: #050a18;
-    --color-navy-900: #0a0f1e;
-    --color-navy-800: #111827;
-    --color-navy-700: #1a2332;
-    --color-navy-600: #243044;
-    --color-navy-500: #334155;
-    --color-navy-400: #64748b;
-    --color-navy-300: #94a3b8;
-    --color-navy-200: #cbd5e1;
-    --color-navy-100: #e2e8f0;
+    /* ── Signal Corps Electric Blue scale ─────────────────── */
+    --color-signal-950: #020b1f;   /* deepest night */
+    --color-signal-900: #05112e;   /* command black-blue */
+    --color-signal-800: #0a1d47;   /* trench dark */
+    --color-signal-700: #0f2a64;   /* corps blue */
+    --color-signal-600: #1a3d8f;   /* reglamento azul */
+    --color-signal-500: #1c4fc5;   /* azul eléctrico base */
+    --color-signal-400: #3b6fe0;   /* azul eléctrico light */
+    --color-signal-300: #6b92e8;   /* sky patrol */
+    --color-signal-200: #a8c0f4;   /* comms blue */
+    --color-signal-100: #dce8fd;   /* light signal */
+    --color-signal-50:  #f0f5ff;   /* white light */
 
-    --color-accent-blue: #3b82f6;
-    --color-accent-blue-light: #60a5fa;
-    --color-accent-purple: #8b5cf6;
-    --color-accent-gradient-start: #3b82f6;
-    --color-accent-gradient-end: #8b5cf6;
+    /* ── MULTICAM Earth Tones scale ───────────────────────── */
+    /* Coyote brown → olive drab → tan/khaki progression      */
+    --color-gold-900: #1e1409;   /* dark earth */
+    --color-gold-800: #3a2712;   /* burnt umber */
+    --color-gold-700: #5c3d1e;   /* coyote brown deep */
+    --color-gold-600: #7a5230;   /* coyote brown */
+    --color-gold-500: #8b6914;   /* olive drab warm */
+    --color-gold-400: #a88c45;   /* tan */
+    --color-gold-300: #c4aa72;   /* khaki */
+    --color-gold-200: #dac89a;   /* light khaki */
+    --color-gold-100: #ede0c0;   /* multicam cream */
+    --color-gold-50:  #f8f2e4;   /* field cream */
 
-    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    /* ── Neutral / Field grey scale ───────────────────────── */
+    --color-field-950: #070a0f;
+    --color-field-900: #0d1117;
+    --color-field-800: #161b24;
+    --color-field-700: #202838;
+    --color-field-600: #303a50;
+    --color-field-500: #4a5568;
+    --color-field-400: #6b7a90;
+    --color-field-300: #94a3b8;
+    --color-field-200: #c8d4e4;
+    --color-field-100: #e8edf5;
+    --color-field-50:  #f4f7fc;
+
+    /* ── Semantic accent shortcuts ────────────────────────── */
+    --color-accent:          var(--color-signal-500);
+    --color-accent-light:    var(--color-signal-400);
+    --color-accent-gold:     var(--color-gold-400);   /* multicam tan */
+    --color-accent-gold-dim: var(--color-gold-600);   /* coyote brown */
+
+    /* ── Typography ───────────────────────────────────────── */
+    /* Space Grotesk — clean, technical, personal */
+    /* Playfair Display — prestige, officer class */
+    /* JetBrains Mono — technical/code tone */
+    --font-sans:  "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+    --font-mono:  "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 }
+
+/* ============================================================
+   BASE LAYER — Dark mode is the default
+   Light mode activates when .light class is on <html>
+   ============================================================ */
 
 @layer base {
     html {
@@ -27,33 +72,124 @@
         color-scheme: dark;
     }
 
+    /* ── DARK MODE (default) ─────────────────────────────── */
+    html,
+    html.dark {
+        --bg-page:        var(--color-signal-950);
+        --bg-surface:     var(--color-signal-900);
+        --bg-elevated:    var(--color-signal-800);
+        --bg-card:        #0c1835;
+        --border:         rgba(28, 79, 197, 0.20);
+        --border-hover:   rgba(28, 79, 197, 0.50);
+        --text-primary:   var(--color-field-100);
+        --text-secondary: var(--color-signal-200);
+        --text-muted:     var(--color-field-400);
+        --text-heading:   #ffffff;
+
+        --accent-primary: var(--color-signal-500);
+        --accent-glow:    rgba(28, 79, 197, 0.30);
+        --accent-gold:    var(--color-gold-400);
+        --accent-gold-glow: rgba(224, 154, 26, 0.25);
+
+        --gradient-hero:  linear-gradient(135deg, var(--color-signal-950) 0%, #08163a 100%);
+        --gradient-accent: linear-gradient(135deg, var(--color-signal-500), var(--color-gold-400));
+        --gradient-card:  linear-gradient(135deg, rgba(28,79,197,0.06), rgba(224,154,26,0.04));
+        --gradient-card-h: linear-gradient(135deg, rgba(28,79,197,0.12), rgba(224,154,26,0.08));
+
+        --scrollbar-track: var(--color-signal-950);
+        --scrollbar-thumb: var(--color-signal-700);
+        --scrollbar-hover: var(--color-signal-600);
+
+        color-scheme: dark;
+    }
+
+    /* ── LIGHT MODE ──────────────────────────────────────── */
+    html.light {
+        --bg-page:        var(--color-field-50);
+        --bg-surface:     #ffffff;
+        --bg-elevated:    var(--color-signal-50);
+        --bg-card:        #ffffff;
+        --border:         rgba(28, 79, 197, 0.18);
+        --border-hover:   rgba(28, 79, 197, 0.45);
+        --text-primary:   var(--color-field-800);
+        --text-secondary: var(--color-signal-700);
+        --text-muted:     var(--color-field-500);
+        --text-heading:   var(--color-signal-900);
+
+        --accent-primary: var(--color-signal-600);
+        --accent-glow:    rgba(26, 61, 143, 0.15);
+        --accent-gold:    var(--color-gold-600);   /* coyote brown */
+        --accent-gold-glow: rgba(168, 140, 69, 0.18); /* multicam tan glow */
+
+        --gradient-hero:  linear-gradient(135deg, var(--color-signal-50) 0%, var(--color-gold-50) 100%);
+        --gradient-accent: linear-gradient(135deg, var(--color-signal-600), var(--color-gold-500));
+        --gradient-card:  linear-gradient(135deg, rgba(28,79,197,0.05), rgba(168,140,69,0.06));
+        --gradient-card-h: linear-gradient(135deg, rgba(28,79,197,0.10), rgba(168,140,69,0.11));
+
+        --scrollbar-track: var(--color-field-100);
+        --scrollbar-thumb: var(--color-signal-300);
+        --scrollbar-hover: var(--color-signal-400);
+
+        color-scheme: light;
+    }
+
+    /* ── Page defaults ───────────────────────────────────── */
     body {
-        @apply bg-navy-950 text-navy-200 antialiased;
+        background-color: var(--bg-page);
+        color: var(--text-primary);
+        font-family: var(--font-sans);
         font-feature-settings: "cv11", "ss01";
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1, h2, h3, h4 {
+        font-family: var(--font-sans);
+        color: var(--text-heading);
+        letter-spacing: -0.02em;
+    }
+
+    /* Headings with serif for prestige feel */
+    .font-serif,
+    .heading-serif {
+        font-family: var(--font-serif);
+    }
+
+    code, pre, kbd, samp {
+        font-family: var(--font-mono);
     }
 
     ::selection {
-        @apply bg-accent-blue/30 text-white;
+        background: var(--accent-glow);
+        color: var(--color-signal-400);
     }
 
     ::-webkit-scrollbar {
-        width: 6px;
+        width: 5px;
     }
 
     ::-webkit-scrollbar-track {
-        @apply bg-navy-950;
+        background: var(--scrollbar-track);
     }
 
     ::-webkit-scrollbar-thumb {
-        @apply bg-navy-600 rounded-full;
+        background: var(--scrollbar-thumb);
+        border-radius: 9999px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        @apply bg-navy-500;
+        background: var(--scrollbar-hover);
     }
 }
 
+/* ============================================================
+   COMPONENT LAYER
+   ============================================================ */
+
 @layer components {
+
+    /* ── Layout ──────────────────────────────────────────── */
     .section-container {
         @apply max-w-6xl mx-auto px-6 sm:px-8 lg:px-12;
     }
@@ -62,25 +198,120 @@
         @apply py-20 sm:py-28 lg:py-32;
     }
 
+    /* ── Gradient text — signal blue → gold ──────────────── */
     .gradient-text {
-        @apply bg-clip-text text-transparent bg-linear-to-r from-accent-gradient-start to-accent-gradient-end;
+        background: var(--gradient-accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
-    .gradient-border {
-        @apply border border-navy-700/50;
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.03), rgba(139, 92, 246, 0.03));
-    }
-
+    /* ── Cards ───────────────────────────────────────────── */
     .card {
-        @apply rounded-xl p-6 transition-all duration-300 border border-navy-700/50;
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.03), rgba(139, 92, 246, 0.03));
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+        background-image: var(--gradient-card);
     }
 
     .card:hover {
-        @apply border-navy-600/80;
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.06), rgba(139, 92, 246, 0.06));
+        border-color: var(--border-hover);
+        background-image: var(--gradient-card-h);
+        box-shadow: 0 0 24px var(--accent-glow), 0 0 6px var(--accent-gold-glow);
     }
 
+    /* ── Accent border / glow ────────────────────────────── */
+    .gradient-border {
+        border: 1px solid var(--border);
+        background-image: var(--gradient-card);
+    }
+
+    /* ── Badge / pill ────────────────────────────────────── */
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.25rem 0.875rem;
+        border-radius: 9999px;
+        border: 1px solid var(--border);
+        background-color: var(--bg-elevated);
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        transition: all 0.2s ease;
+    }
+
+    /* ── Buttons ─────────────────────────────────────────── */
+    .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        background: var(--gradient-accent);
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.875rem;
+        letter-spacing: 0.02em;
+        transition: opacity 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary:hover {
+        opacity: 0.88;
+        box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+        font-weight: 500;
+        font-size: 0.875rem;
+        background: transparent;
+        transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+        border-color: var(--border-hover);
+        color: var(--text-heading);
+    }
+
+    /* ── Theme toggle button ─────────────────────────────── */
+    .theme-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 9999px;
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+        border-color: var(--border-hover);
+        color: var(--accent-gold);
+        box-shadow: 0 0 12px var(--accent-gold-glow);
+    }
+
+    /* Show correct icon based on scheme */
+    html.dark  .theme-toggle .icon-sun  { display: block; }
+    html.dark  .theme-toggle .icon-moon { display: none;  }
+    html.light .theme-toggle .icon-sun  { display: none;  }
+    html.light .theme-toggle .icon-moon { display: block; }
+
+    /* ── Animations ──────────────────────────────────────── */
     .fade-in {
         opacity: 0;
         transform: translateY(20px);
@@ -90,5 +321,41 @@
     .fade-in.visible {
         opacity: 1;
         transform: translateY(0);
+    }
+
+    /* ── Gold accent rule ────────────────────────────────── */
+    .divider-gold {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+        border: none;
+        opacity: 0.5;
+    }
+
+    /* ── Section heading with gold underline ─────────────── */
+    .section-title {
+        position: relative;
+        display: inline-block;
+        color: var(--text-heading);
+        font-size: 1.875rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+    }
+
+    .section-title::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 2.5rem;
+        height: 3px;
+        border-radius: 2px;
+        background: var(--gradient-accent);
+    }
+
+    /* ── Nav scrolled state ──────────────────────────────── */
+    .nav-scrolled {
+        background-color: color-mix(in srgb, var(--bg-page) 88%, transparent);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
     }
 }
